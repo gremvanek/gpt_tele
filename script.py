@@ -25,11 +25,9 @@ def send_welcome(message):
 
 def generate_response(prompt):
     try:
-        completion = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": prompt}]
-        )
-        return completion.choices[0].message['content']
+        completion = openai.chat.completions.create(model="gpt-3.5-turbo",
+        messages=[{"role": "user", "content": prompt}])
+        return completion.choices[0].message.content
     except Exception as e:
         logging.error(f"Error generating response: {e}")
         return "Извините, возникла ошибка при обработке вашего запроса."
